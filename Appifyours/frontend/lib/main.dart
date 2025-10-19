@@ -108,6 +108,30 @@ class WishlistManager extends ChangeNotifier {
     return _items.any((item) => item.id == id);
   }
 }
+final List<Map<String, dynamic>> productCards = [
+  {
+    'productName': 'Product Name';
+    'shortDescription': '100% cotton, Free size';
+    'imageAsset': null,
+    'price': '$299';
+    'discountPrice': '$199';
+    'rating': '4.5';
+    'reviewCount': '128';
+    'brandName': 'Brand Name';
+    'stockStatus': 'In Stock';
+    'badgeText': 'New';
+    'badgeColor': '#FF0000';
+    'quantity': 1,
+    'weight': '';
+    'weightUnit': 'kg';
+  },
+  {
+    'productName': 'sambar';
+    'imageAsset': null,
+    'price': '600';
+    'discountPrice': '100';
+  }
+];
 void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -189,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Search products by name or price',
+                            hintText: 'price and name',
                             prefixIcon: const Icon(Icons.search),
                             suffixIcon: const Icon(Icons.filter_list),
                             border: OutlineInputBorder(
@@ -468,7 +492,7 @@ class _HomePageState extends State<HomePage> {
                         const Icon(Icons.store, size: 32, color: Colors.white),
                         const SizedBox(width: 8),
                         Text(
-                          'priyooo',
+                          'priyoooo',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
