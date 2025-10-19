@@ -184,15 +184,33 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         TextField(
+                          onChanged: (searchQuery) {
+                            setState(() {
+                            });
+                          },
                           decoration: InputDecoration(
-                            hintText: 'Search products',
+                            hintText: 'Search products by name or price',
                             prefixIcon: const Icon(Icons.search),
+                            suffixIcon: const Icon(Icons.filter_list),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
                             filled: true,
                             fillColor: Colors.grey.shade100,
                           ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            const Icon(Icons.info_outline, size: 16, color: Colors.grey),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                'Search by product name or price (e.g., "Product Name" or "$299")',
+                                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -270,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisSpacing: 12,
                             childAspectRatio: 0.75,
                           ),
-                          itemCount: 3,
+                          itemCount: 2,
                           itemBuilder: (context, index) {
                             final product = productCards[index];
                             final productId = 'product_$index';
@@ -450,7 +468,7 @@ class _HomePageState extends State<HomePage> {
                         const Icon(Icons.store, size: 32, color: Colors.white),
                         const SizedBox(width: 8),
                         Text(
-                          'priya',
+                          'priyooo',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
