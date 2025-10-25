@@ -641,6 +641,23 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Description',
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'This is a detailed description of the product.',
+                          style: const TextStyle(fontSize: 12, height: 1.5),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
