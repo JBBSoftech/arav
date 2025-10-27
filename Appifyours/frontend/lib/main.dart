@@ -340,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                         
                         const SizedBox(width: 8),
                         Text(
-                          'mohan',
+                          'mohanG',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -754,7 +754,7 @@ class _HomePageState extends State<HomePage> {
                                                   color: product['discountPrice'] != null ? Colors.blue : Colors.black,
                                                 ),
                                               ),
-                                                                                            if (product['discountPrice'] != null && product['price'] != null)
+                                                                                            if (product['discountPrice'] != null && product['discountPrice'].toString().isNotEmpty && product['price'] != null)
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 6.0),
                                                   child: Text(
@@ -1317,20 +1317,28 @@ class _HomePageState extends State<HomePage> {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(
+      items: [
+        const BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart),
+          icon: Badge(
+            label: Text('${_cartManager.itemCount}'),
+            isLabelVisible: _cartManager.itemCount > 0,
+            child: const Icon(Icons.shopping_cart),
+          ),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
+          icon: Badge(
+            label: Text('${_wishlistManager.itemCount}'),
+            isLabelVisible: _wishlistManager.itemCount > 0,
+            child: const Icon(Icons.favorite),
+          ),
           label: 'Wishlist',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'Profile',
         ),
@@ -1345,20 +1353,28 @@ class _HomePageState extends State<HomePage> {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(
+      items: [
+        const BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart),
+          icon: Badge(
+            label: Text('${_cartManager.itemCount}'),
+            isLabelVisible: _cartManager.itemCount > 0,
+            child: const Icon(Icons.shopping_cart),
+          ),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
+          icon: Badge(
+            label: Text('${_wishlistManager.itemCount}'),
+            isLabelVisible: _wishlistManager.itemCount > 0,
+            child: const Icon(Icons.favorite),
+          ),
           label: 'Wishlist',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'Profile',
         ),
