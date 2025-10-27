@@ -340,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                         
                         const SizedBox(width: 8),
                         Text(
-                          'mohanG',
+                          'mohanraj',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -1324,16 +1324,16 @@ class _HomePageState extends State<HomePage> {
         ),
         BottomNavigationBarItem(
           icon: Badge(
-            label: Text('${_cartManager.itemCount}'),
-            isLabelVisible: _cartManager.itemCount > 0,
+            label: Text('${_cartManager.items.length}'),
+            isLabelVisible: _cartManager.items.length > 0,
             child: const Icon(Icons.shopping_cart),
           ),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
           icon: Badge(
-            label: Text('${_wishlistManager.itemCount}'),
-            isLabelVisible: _wishlistManager.itemCount > 0,
+            label: Text('${_wishlistManager.items.length}'),
+            isLabelVisible: _wishlistManager.items.length > 0,
             child: const Icon(Icons.favorite),
           ),
           label: 'Wishlist',
@@ -1360,16 +1360,16 @@ class _HomePageState extends State<HomePage> {
         ),
         BottomNavigationBarItem(
           icon: Badge(
-            label: Text('${_cartManager.itemCount}'),
-            isLabelVisible: _cartManager.itemCount > 0,
+            label: Text('${_cartManager.items.length}'),
+            isLabelVisible: _cartManager.items.length > 0,
             child: const Icon(Icons.shopping_cart),
           ),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
           icon: Badge(
-            label: Text('${_wishlistManager.itemCount}'),
-            isLabelVisible: _wishlistManager.itemCount > 0,
+            label: Text('${_wishlistManager.items.length}'),
+            isLabelVisible: _wishlistManager.items.length > 0,
             child: const Icon(Icons.favorite),
           ),
           label: 'Wishlist',
