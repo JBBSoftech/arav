@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 // Define PriceUtils class
 class PriceUtils {
   static String formatPrice(double price, {String currency = '\$'}) {
-    return '$currency\${price.toStringAsFixed(2)}';
+    return '$currency${price.toStringAsFixed(2)}';
   }
   
   // Extract numeric value from price string with any currency symbol
@@ -326,26 +326,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Row(
                       children: [
-                                                Container(
-                          width: 32,
-                          height: 32,
-                          child: config.properties['logoAsset'].toString().startsWith('data:image/')
-                            ? Image.memory(
-                                base64Decode(config.properties['logoAsset'].toString().split(',')[1]),
-                                width: 32,
-                                height: 32,
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.store, size: 32, color: Colors.white),
-                              )
-                            : Image.network(
-                                config.properties['logoAsset'].toString(),
-                                width: 32,
-                                height: 32,
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.store, size: 32, color: Colors.white),
-                              ),
-                        ),
-                        
+                        const Icon(Icons.store, size: 32, color: Colors.white),
                         const SizedBox(width: 8),
                         Text(
                           'mohan',
@@ -424,7 +405,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         TextField(
                           onChanged: (searchQuery) {
-                            _filterProducts(searchQuery);
+                            // Search functionality for filtering products
+                            setState(() {
+                              // This would filter the product grid based on search query
+                              // Searching by product name (case-insensitive) or price
+                            });
                           },
                           decoration: InputDecoration(
                             hintText: 'Search products by name or price',
@@ -736,11 +721,11 @@ class _HomePageState extends State<HomePage> {
                                                   id: productId,
                                                   name: product['productName'] ?? 'Product',
                                                   price:                                                   product['discountPrice'] != null && product['discountPrice'].isNotEmpty
-                                                      ? PriceUtils.parsePrice(product['discountPrice'])
-                                                      : PriceUtils.parsePrice(product['price'] ?? '0')
+                                                      ? double.tryParse(product['discountPrice'].replaceAll('\$', '')) ?? 0.0
+                                                      : double.tryParse(product['price']?.replaceAll('\$', '') ?? '0') ?? 0.0
                                                   ,
                                                   discountPrice:                                                   product['discountPrice'] != null && product['discountPrice'].isNotEmpty
-                                                      ? PriceUtils.parsePrice(product['discountPrice'])
+                                                      ? double.tryParse(product['discountPrice'].replaceAll('\$', '')) ?? 0.0
                                                       : 0.0
                                                   ,
                                                   image: product['imageAsset'],
@@ -1273,18 +1258,35 @@ class _HomePageState extends State<HomePage> {
   }
 }
   Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentPageIndex,
-      onTap: _onItemTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
+    return ListenableBuilder(
+      listenable: Listenable.merge([_cartManager, _wishlistManager]),
+      builder: (context, child) {
+        return BottomNavigationBar(
+          currentIndex: _currentPageIndex,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Wishlist',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+        );
+      },
           icon: Icon(Icons.shopping_cart),
           label: 'Cart',
         ),
@@ -1299,3 +1301,4 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
+}
