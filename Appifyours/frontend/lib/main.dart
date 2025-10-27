@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 // Define PriceUtils class
 class PriceUtils {
   static String formatPrice(double price, {String currency = '\$'}) {
-    return '$currency${price.toStringAsFixed(2)}';
+    return '$currency\${price.toStringAsFixed(2)}';
   }
   
   // Extract numeric value from price string with any currency symbol
@@ -326,10 +326,29 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Row(
                       children: [
-                        const Icon(Icons.store, size: 32, color: Colors.white),
+                                                Container(
+                          width: 32,
+                          height: 32,
+                          child: config.properties['logoAsset'].toString().startsWith('data:image/')
+                            ? Image.memory(
+                                base64Decode(config.properties['logoAsset'].toString().split(',')[1]),
+                                width: 32,
+                                height: 32,
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.store, size: 32, color: Colors.white),
+                              )
+                            : Image.network(
+                                config.properties['logoAsset'].toString(),
+                                width: 32,
+                                height: 32,
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.store, size: 32, color: Colors.white),
+                              ),
+                        ),
+                        
                         const SizedBox(width: 8),
                         Text(
-                          'jeeva',
+                          'mohan',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -405,11 +424,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         TextField(
                           onChanged: (searchQuery) {
-                            // Search functionality for filtering products
-                            setState(() {
-                              // This would filter the product grid based on search query
-                              // Searching by product name (case-insensitive) or price
-                            });
+                            _filterProducts(searchQuery);
                           },
                           decoration: InputDecoration(
                             hintText: 'Search products by name or price',
@@ -721,11 +736,11 @@ class _HomePageState extends State<HomePage> {
                                                   id: productId,
                                                   name: product['productName'] ?? 'Product',
                                                   price:                                                   product['discountPrice'] != null && product['discountPrice'].isNotEmpty
-                                                      ? double.tryParse(product['discountPrice'].replaceAll('\$', '')) ?? 0.0
-                                                      : double.tryParse(product['price']?.replaceAll('\$', '') ?? '0') ?? 0.0
+                                                      ? PriceUtils.parsePrice(product['discountPrice'])
+                                                      : PriceUtils.parsePrice(product['price'] ?? '0')
                                                   ,
                                                   discountPrice:                                                   product['discountPrice'] != null && product['discountPrice'].isNotEmpty
-                                                      ? double.tryParse(product['discountPrice'].replaceAll('\$', '')) ?? 0.0
+                                                      ? PriceUtils.parsePrice(product['discountPrice'])
                                                       : 0.0
                                                   ,
                                                   image: product['imageAsset'],
