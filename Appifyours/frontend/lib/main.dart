@@ -322,7 +322,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
                   Container(
-                    color: Color(0xff360ced),
+                    color: Color(0xff2196f3),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Row(
                       children: [
