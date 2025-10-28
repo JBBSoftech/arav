@@ -432,7 +432,7 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'danger',
+                            hintText: '',
                             prefixIcon: const Icon(Icons.search),
                             suffixIcon: const Icon(Icons.filter_list),
                             border: OutlineInputBorder(
