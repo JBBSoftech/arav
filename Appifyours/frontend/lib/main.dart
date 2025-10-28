@@ -340,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                         
                         const SizedBox(width: 8),
                         Text(
-                          'mohan',
+                          'mohanraj',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -882,7 +882,7 @@ class _HomePageState extends State<HomePage> {
                                       child: const Icon(Icons.store, size: 24),
                                     ),
                                   ),
-                                )
+                                ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Text(
