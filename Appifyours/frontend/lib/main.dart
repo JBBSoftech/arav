@@ -340,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                         
                         const SizedBox(width: 8),
                         Text(
-                          'mohan raj',
+                          'mohan',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
