@@ -340,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                         
                         const SizedBox(width: 8),
                         Text(
-                          'mohanraj kumar ',
+                          'mohanraj',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -756,11 +756,9 @@ class _HomePageState extends State<HomePage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              // Current/Discount Price
+                                              // Current/Final Price (always without strikethrough)
                                               Text(
-                                                                                                product['discountPrice'] != null && product['discountPrice'].toString().isNotEmpty
-                                                    ? product['discountPrice']
-                                                    : product['price'] ?? '$0'
+                                                                                                product['price'] ?? '$0'
                                                 ,
                                                 style: const TextStyle(
                                                   fontSize: 14,
@@ -771,7 +769,7 @@ class _HomePageState extends State<HomePage> {
                                               // Original Price (if discount exists)
                                                                                             if (product['discountPrice'] != null && product['discountPrice'].toString().isNotEmpty)
                                                 Text(
-                                                  product['price'] ?? '',
+                                                  product['discountPrice'] ?? '',
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     decoration: TextDecoration.lineThrough,
