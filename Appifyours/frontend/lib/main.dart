@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http';
+import 'package:http/http.dart' as http;
 
+// Define PriceUtils class
+class PriceUtils {
+  static String formatPrice(double price, {String currency = '\$'}) {
+    return '$currency\${price.toStringAsFixed(2)}';
+  }
+  
   // Extract numeric value from price string with any currency symbol
   static double parsePrice(String priceString) {
     if (priceString.isEmpty) return 0.0;
@@ -100,13 +106,12 @@ class CartManager extends ChangeNotifier {
   }
   
   double get totalWithTax {
-    final tax = subtotal * 0.08; // 8% tax
+    final tax = PriceUtils.calculateTax(subtotal, 8.0); // 8% tax
     return subtotal + tax;
   }
   
   double get finalTotal {
-    final shipping = subtotal >= 100.0 ? 0.0 : 5.99; // Free shipping over $100
-    return totalWithTax + shipping;
+    return PriceUtils.applyShipping(totalWithTax, 5.99); // $5.99 shipping
   }
 }
 
@@ -771,11 +776,11 @@ class _HomePageState extends State<HomePage> {
                                               // Original Price (if discount exists)
                                                                                             if (product['discountPrice'] != null && product['discountPrice'].toString().isNotEmpty)
                                                 Text(
-                                                  product['price'] ?? '',
+                                                  product['discountPrice'] ?? '',
                                                   style: TextStyle(
                                                     fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.blue,
+                                                    decoration: TextDecoration.lineThrough,
+                                                    color: Colors.grey.shade600,
                                                   ),
                                                 ),
                                               
